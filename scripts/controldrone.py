@@ -20,9 +20,8 @@ import csv
 K_x = -93.00
 K_y = 100.00
 
-# K_x = -70.00
-# K_y = 80.00
 Vel = 10
+
 GOAL_DIST_THRESHOLD = 20 #cm
 
 local1_address = ('', 9010 )
@@ -72,18 +71,18 @@ def move_xy(goal_x, goal_y, drone_x, drone_y, drone):
 
     if abs(move_x) <= GOAL_DIST_THRESHOLD and abs(move_y) <= GOAL_DIST_THRESHOLD:
         
-        # if move_x > 10:
-        #   send("forward 20 ", 1, drone)
-        #   if move_y > 10:
-        #     send("right 20 ", 1, drone)
-        #   elif move_y < -10:
-        #     send("left 20 ", 1, drone)
-        # elif move_x < -10:
-        #   send("back 20 ", 1, drone)
-        #   if move_y > 10:
-        #     send("right 20 ", 1, drone)
-        #   elif move_y < -10:
-        #     send("left 20 ", 1, drone)
+        if move_x > 10:
+          send("forward 20 ", 1, drone)
+          if move_y > 10:
+            send("right 20 ", 1, drone)
+          elif move_y < -10:
+            send("left 20 ", 1, drone)
+        elif move_x < -10:
+          send("back 20 ", 1, drone)
+          if move_y > 10:
+            send("right 20 ", 1, drone)
+          elif move_y < -10:
+            send("left 20 ", 1, drone)
         
         
         status = 'Goal Position reached'
@@ -92,9 +91,8 @@ def move_xy(goal_x, goal_y, drone_x, drone_y, drone):
         status = 'Goal Position not reached'
         move_x = int(K_x * (goal_x - drone_x))
         move_y = int(K_y * (goal_y - drone_y))
-    
-    print ("%s go (x: %3.3f, y: %3.3f)" % (drone, move_x, move_y))
-    send("go " + str(move_x) + " " + str(move_y) + " 0 " + str(Vel), 0, drone)
+        print ("%s go (x: %3.3f, y: %3.3f)" % (drone, move_x, move_y))
+        send("go " + str(move_x) + " " + str(move_y) + " 0 " + str(Vel), 0, drone)
   
     return status
 

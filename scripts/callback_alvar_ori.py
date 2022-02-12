@@ -29,6 +29,4 @@ def callback_alvmarker(AlvarMsg):
     (drone_x, drone_y) = markers[0]['x'], markers[0]['y']
     (goal_x, goal_y) = markers[22]['x'], markers[22]['y']
 
-
     return drone_x, drone_y, goal_x, goal_y
-
